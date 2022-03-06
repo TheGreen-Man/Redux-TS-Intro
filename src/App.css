@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -36,4 +36,57 @@
   100% {
     transform: translateY(0px);
   }
+} */
+
+.wrapper {
+	width: 500px;
+	margin: 0 auto;
+}
+
+.wrapper > div:first-child {
+	display: grid;
+	grid-template-areas:
+		"inputt inputt inputt inputt btn1"
+		"btn2 . btn3 . btn4";
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	margin-top: 30px;
+	column-gap: 10px;
+	row-gap: 20px;
+}
+.wrapper > div:first-child > input {
+	grid-area: inputt;
+}
+.wrapper > div:first-child > button:first-of-type {
+	grid-area: btn1;
+	/* width: 10px; */
+}
+.wrapper > div:first-child > button:nth-child(3) {
+	grid-area: btn2;
+}
+.wrapper > div:first-child > button:nth-child(4) {
+	grid-area: btn3;
+}
+.wrapper > div:first-child > button:nth-child(5) {
+	grid-area: btn4;
+}
+
+.wrapper > div:not(:first-child) {
+	margin-top: 30px;
+}
+.wrapper > div:not(:first-child) > ul {
+	list-style-type: none;
+}
+.wrapper > div:not(:first-child) > ul > li {
+	display: flex;
+	gap: 5px;
+	flex-wrap: nowrap;
+	margin: 15px 0px 15px -25px;
+	padding: 5px 0;
+}
+/* .wrapper > div:not(:first-child) > ul > li > input {
+} */
+
+.wrapper > div:not(:first-child) > ul > li > span {
+	margin-left: 10px;
+	flex-grow: 1;
 }

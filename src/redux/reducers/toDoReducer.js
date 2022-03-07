@@ -1,5 +1,9 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { addToDoAction, deleteToDoAction } from "../actions/toDoActions";
+import {
+	addToDoAction,
+	deleteToDoAction,
+	completedChangeAction,
+} from "../actions/toDoActions";
 
 const initialState = {
 	toDos: [],
@@ -13,6 +17,13 @@ const toDoReducer = createReducer(initialState, (builder) => {
 		.addCase(deleteToDoAction, (state, action) => {
 			state.toDos = state.toDos.filter(
 				(toDo) => toDo.id !== action.payload.id
+			);
+		})
+		.addCase(completedChangeAction, (state, action) => {
+			state.toDos = state.toDos.map((toDo) =>
+				toDo.id === action.payload.id
+					? { ...toDo, completed: action.payload.completed }
+					: { ...toDo }
 			);
 		});
 });

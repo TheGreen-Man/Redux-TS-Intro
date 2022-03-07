@@ -11,3 +11,4 @@ import { createAction } from "@reduxjs/toolkit";
 
 export const addToDoAction = createAction("ADD_TODO");
 export const deleteToDoAction = createAction("DELETE_TODO");
+export const completedChangeAction = createAction("CHANGE_STATE");

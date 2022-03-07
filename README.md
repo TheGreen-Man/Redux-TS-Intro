@@ -1,1 +1,1 @@
-Introduction project for Redux and Typescript made before starting working on eComm website.
+Introduction project, ToDoApp, for Redux and Typescript made before starting to work on eComm website.

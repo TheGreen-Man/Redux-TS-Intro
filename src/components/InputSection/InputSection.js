@@ -2,6 +2,11 @@ import React, { useState, useRef } from "react";
 
 import { useDispatch } from "react-redux";
 import { addToDoAction } from "../../redux/actions/toDoActions";
+import {
+	showAll,
+	showCompleted,
+	showIncomplete,
+} from "../../redux/actions/filterActions";
 import { nanoid } from "nanoid";
 
 // ovaj princip, ali preko redux-a!
@@ -14,6 +19,8 @@ import { nanoid } from "nanoid";
 
 export default function InputSection() {
 	const [toDo, setToDo] = useState("");
+	// const [filter, setFilter] = useState(() => true);
+
 	const inputField = useRef(null);
 	const dispatch = useDispatch();
 
@@ -31,6 +38,21 @@ export default function InputSection() {
 		inputField.current.focus();
 	};
 
+	// const filterChanger = (e) => {
+	// 	switch (e) {
+	// 		case "All":
+	// 			break;
+	// 		case "Active":
+	// 			dispatch(showIncomplete((item) => item.completed === false));
+	// 			break;
+	// 		case "Completed":
+	// 			dispatch(showCompleted((item) => item.completed === true));
+	// 			break;
+	// 		default:
+	// 			break;
+	// 	}
+	// };
+
 	return (
 		<div>
 			<input
@@ -42,9 +64,21 @@ export default function InputSection() {
 				ref={inputField}
 			/>
 			<button onClick={addToDo}>Add</button>
-			<button>All</button>
-			<button>Active</button>
-			<button>Completed</button>
+			<button onClick={dispatch(showAll(() => true))}>All</button>
+			<button
+				onClick={dispatch(
+					showIncomplete((item) => item.completed === false)
+				)}
+			>
+				Active
+			</button>
+			<button
+				onClick={dispatch(
+					showCompleted((item) => item.completed === true)
+				)}
+			>
+				Completed
+			</button>
 		</div>
 	);
 }

@@ -1,11 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import toDoReducer from "./to-dos-slice";
-// import dummyReducer from "./dummyReducer";
+import filterReducer from "./reducers/filterReducer";
 import toDoReducer from "./reducers/toDoReducer";
 
 export const store = configureStore({
 	reducer: {
-		// dummy: dummyReducer,
+		filter: filterReducer,
 		toDo: toDoReducer,
 	},
 });

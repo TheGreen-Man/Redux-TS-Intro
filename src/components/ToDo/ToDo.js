@@ -7,7 +7,8 @@ import {
 
 export default function ToDo() {
 	const toDoList = useSelector((state) => state.toDo.toDos);
-
+	const filter = useSelector((state) => state.filter);
+	// console.log(filter);
 	const dispatch = useDispatch();
 	const deleteToDoHandler = (id) => {
 		dispatch(deleteToDoAction({ id: id }));

@@ -11,7 +11,7 @@ import { nanoid } from "nanoid";
 
 // ovaj princip, ali preko redux-a!
 // const FILTER_MAP = {
-// 	All: () => true,
+// const ALL = () => true;
 // 	Active: (task) => !task.completed,
 // 	Completed: (task) => task.completed,
 // };
@@ -41,6 +41,7 @@ export default function InputSection() {
 	// const filterChanger = (e) => {
 	// 	switch (e) {
 	// 		case "All":
+	// 			dispatch(showAll(() => true));
 	// 			break;
 	// 		case "Active":
 	// 			dispatch(showIncomplete((item) => item.completed === false));
@@ -64,18 +65,18 @@ export default function InputSection() {
 				ref={inputField}
 			/>
 			<button onClick={addToDo}>Add</button>
-			<button onClick={dispatch(showAll(() => true))}>All</button>
+			<button onClick={() => dispatch(showAll(() => true))}>All</button>
 			<button
-				onClick={dispatch(
-					showIncomplete((item) => item.completed === false)
-				)}
+				onClick={() =>
+					dispatch(showIncomplete((item) => item.completed === false))
+				}
 			>
-				Active
+				Incomplete
 			</button>
 			<button
-				onClick={dispatch(
-					showCompleted((item) => item.completed === true)
-				)}
+				onClick={() =>
+					dispatch(showCompleted((item) => item.completed === true))
+				}
 			>
 				Completed
 			</button>

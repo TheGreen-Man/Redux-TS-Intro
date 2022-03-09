@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
 	deleteToDoAction,
@@ -6,9 +6,12 @@ import {
 } from "../../redux/actions/toDoActions";
 
 export default function ToDo() {
+	const [editable, setEditable] = useState(false);
+	const focusMe = useRef(null);
+	console.log(editable);
 	const toDoList = useSelector((state) => state.toDo.toDos);
 	const filter = useSelector((state) => state.filter);
-	// console.log(filter);
+
 	const dispatch = useDispatch();
 	const deleteToDoHandler = (id) => {
 		dispatch(deleteToDoAction({ id: id }));
@@ -17,15 +20,24 @@ export default function ToDo() {
 		dispatch(completedChangeAction({ id: id, completed: state }));
 	};
 
-	const toDoLi = toDoList.map((toDo) => (
+	const editHandler = () => {
+		setEditable(!editable);
+		focusMe.current.focus();
+	};
+
+	const toDoLi = toDoList.filter(filter).map((toDo) => (
 		<li key={toDo.id}>
 			<input
 				type="checkbox"
-				checked={toDo.checked}
+				checked={toDo.completed}
 				onChange={(e) => toDoStateHandler(toDo.id, e.target.checked)}
 			/>
-			<span>{toDo.text}</span>
-			<button onClick={() => console.log("edit")}>edit</button>
+			{editable ? (
+				<input ref={focusMe} value={toDo.text} />
+			) : (
+				<span>{toDo.text}</span>
+			)}
+			<button onClick={() => editHandler()}>edit</button>
 			<button onClick={() => deleteToDoHandler(toDo.id)}>del</button>
 		</li>
 	));

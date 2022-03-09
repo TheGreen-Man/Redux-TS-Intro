@@ -5,18 +5,13 @@ import {
 	showIncomplete,
 } from "../actions/filterActions";
 
-const initialState = function () {
-	return function () {
-		return true;
-	};
-};
+const initialState = () => () => true;
 
 const filterReducer = createReducer(initialState, (builder) => {
 	builder
-		.addCase(showAll, (state, action) => action.payload)
-
-		.addCase(showCompleted, (state, action) => action.payload)
-		.addCase(showIncomplete, (state, action) => action.payload);
+		.addCase(showAll, (state, action) => (state = action.payload))
+		.addCase(showCompleted, (state, action) => (state = action.payload))
+		.addCase(showIncomplete, (state, action) => (state = action.payload));
 });
 
 export default filterReducer;

@@ -1,6 +1,6 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import filterReducer from "./reducers/filterReducer";
-import toDoReducer from "./reducers/toDoReducer";
+import filterReducer from "./slices/filterSlice";
+import toDoReducer from "./slices/toDoSlice";
 
 const reducer = {
 	filter: filterReducer,

@@ -1,13 +1,12 @@
 import React, { useState, useRef } from "react";
 
 import { useDispatch } from "react-redux";
-import { addToDoAction } from "../../redux/actions/toDoActions";
+import { addToDo } from "../../redux/slices/toDoSlice";
 import {
 	showAll,
 	showCompleted,
 	showIncomplete,
-} from "../../redux/actions/filterActions";
-import { nanoid } from "nanoid";
+} from "../../redux/slices/filterSlice";
 
 // ovaj princip, ali preko redux-a!
 // const FILTER_MAP = {
@@ -24,14 +23,13 @@ export default function InputSection() {
 	const inputField = useRef(null);
 	const dispatch = useDispatch();
 
-	const addToDo = (e) => {
+	const addToDoFunction = (e) => {
 		e.preventDefault();
 		if (toDo.trim() === "") return;
 		dispatch(
-			addToDoAction({
+			addToDo({
 				text: toDo,
 				completed: false,
-				id: nanoid(),
 			})
 		);
 		setToDo("");
@@ -60,11 +58,11 @@ export default function InputSection() {
 				value={toDo}
 				onChange={(e) => setToDo(e.target.value)}
 				onKeyPress={(e) => {
-					if (e.key === "Enter") addToDo(e);
+					if (e.key === "Enter") addToDoFunction(e);
 				}}
 				ref={inputField}
 			/>
-			<button onClick={addToDo}>Add</button>
+			<button onClick={addToDoFunction}>Add</button>
 			<button onClick={() => dispatch(showAll(() => true))}>All</button>
 			<button
 				onClick={() =>

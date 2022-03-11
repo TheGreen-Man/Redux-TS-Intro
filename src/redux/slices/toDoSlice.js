@@ -18,6 +18,7 @@ const toDoSlice = createSlice({
 					payload: {
 						...value,
 						id: nanoid(),
+						editable: false,
 					},
 				};
 			},
@@ -34,9 +35,17 @@ const toDoSlice = createSlice({
 					: { ...toDo }
 			);
 		},
+		editable(state, action) {
+			state.toDos = state.toDos.map((toDo) =>
+				toDo.id === action.payload.id
+					? { ...toDo, editable: action.payload.editable }
+					: { ...toDo }
+			);
+		},
 	},
 });
 
-export const { addToDo, deleteToDo, completedChange } = toDoSlice.actions;
+export const { addToDo, deleteToDo, completedChange, editable } =
+	toDoSlice.actions;
 
 export default toDoSlice.reducer;

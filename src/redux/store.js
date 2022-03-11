@@ -1,10 +1,12 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import filterReducer from "./slices/filterSlice";
-import toDoReducer from "./slices/toDoSlice";
+import filterSlice from "./slices/filterSlice";
+import toDoSlice from "./slices/toDoSlice";
+// import editSlice from "./slices/editableSlice";
 
 const reducer = {
-	filter: filterReducer,
-	toDo: toDoReducer,
+	filter: filterSlice,
+	toDo: toDoSlice,
+	// edit: editSlice
 };
 
 const customizedMiddleware = getDefaultMiddleware({

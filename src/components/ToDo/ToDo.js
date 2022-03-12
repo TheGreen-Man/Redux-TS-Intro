@@ -7,7 +7,6 @@ import {
 } from "../../redux/slices/toDoSlice";
 
 export default function ToDo() {
-	const [isEditable, setEditable] = useState(true);
 	const [editedToDo, setEditedToDo] = useState("");
 
 	const toDoList = useSelector((state) => state.toDo.toDos);
@@ -20,10 +19,8 @@ export default function ToDo() {
 		dispatch(completedChange({ id: id, completed: state }));
 	};
 
-	const editHandler = (id, text) => {
-		// setEditedToDo(text);
-		dispatch(editable({ id: id, editable: isEditable }));
-		setEditable(!isEditable);
+	const editHandler = (id) => {
+		dispatch(editable({ id: id, editable: true }));
 	};
 
 	const toDoLi = toDoList.filter(filter).map((toDo) => (
@@ -35,16 +32,38 @@ export default function ToDo() {
 			/>
 			{toDo.editable ? (
 				<input
+					placeholder={`Edit ${toDo.text}`}
 					value={editedToDo}
 					onChange={(e) => setEditedToDo(e.target.value)}
+					autoFocus
 				/>
 			) : (
 				<span>{toDo.text}</span>
 			)}
-			<button onClick={() => editHandler(toDo.id, toDo.text)}>
-				edit
-			</button>
-			<button onClick={() => deleteToDoHandler(toDo.id)}>del</button>
+			{toDo.editable ? (
+				<button
+					onClick={() =>
+						dispatch(editable({ id: toDo.id, editable: false }))
+					}
+				>
+					Save
+				</button>
+			) : (
+				<button onClick={() => editHandler(toDo.id)}>Edit</button>
+			)}
+			{toDo.editable ? (
+				<button
+					onClick={() =>
+						dispatch(editable({ id: toDo.id, editable: false }))
+					}
+				>
+					Cancel
+				</button>
+			) : (
+				<button onClick={() => deleteToDoHandler(toDo.id)}>
+					Delete
+				</button>
+			)}
 		</li>
 	));
 

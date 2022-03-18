@@ -42,10 +42,21 @@ const toDoSlice = createSlice({
 					: { ...toDo }
 			);
 		},
+		editTask(state, action) {
+			state.toDos = state.toDos.map((toDo) =>
+				toDo.id === action.payload.id
+					? {
+							...toDo,
+							text: action.payload.text,
+							editable: action.payload.editable,
+					  }
+					: { ...toDo }
+			);
+		},
 	},
 });
 
-export const { addToDo, deleteToDo, completedChange, editable } =
+export const { addToDo, deleteToDo, completedChange, editable, editTask } =
 	toDoSlice.actions;
 
 export default toDoSlice.reducer;

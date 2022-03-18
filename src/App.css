@@ -86,11 +86,17 @@
 /* .wrapper > div:not(:first-child) > ul > li > input {
 } */
 
-.wrapper > div:not(:first-child) > ul > li > span {
+.wrapper > div:not(:first-child) > ul li span {
 	margin-left: 10px;
 	flex-grow: 1;
 }
-.wrapper > div:not(:first-child) > ul > li > input:not(:first-child) {
+form {
+	display: flex;
+	width: 100%;
+	gap: 5px;
+	flex-wrap: nowrap;
+}
+.wrapper > div:not(:first-child) > ul li form input {
 	margin-left: 10px;
 	flex-grow: 1;
 }

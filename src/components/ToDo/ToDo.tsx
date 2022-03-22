@@ -7,8 +7,8 @@ import {
 	editTask,
 } from "../../redux/slices/toDoSlice";
 
-export default function ToDo() {
-	const [taskID, setTaskID] = useState("");
+const ToDo: React.FC = () => {
+	const [taskID, setTaskID] = useState<string>("");
 
 	const toDoList = useSelector((state) => state.toDo.toDos);
 	const filter = useSelector((state) => state.filter);
@@ -26,6 +26,7 @@ export default function ToDo() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		if (e.target[0].value.trim() === "") return;
 		dispatch(
 			editTask({ id: taskID, text: e.target[0].value, editable: false })
 		);
@@ -65,4 +66,6 @@ export default function ToDo() {
 	));
 
 	return toDoLi;
-}
+};
+
+export default ToDo;

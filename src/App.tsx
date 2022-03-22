@@ -1,10 +1,10 @@
-// import React from 'react';
+import React from "react";
 // import logo from './logo.svg';
 // import { Counter } from './features/counter/Counter';
 import "./App.css";
 import InputSection from "./components/InputSection/InputSection";
 import ToDo from "./components/ToDo/ToDo";
-function App() {
+const App: React.FC = () => {
 	return (
 		<div className="wrapper">
 			<InputSection />
@@ -63,6 +63,6 @@ function App() {
 		//   </header>
 		// </div>
 	);
-}
+};
 
 export default App;

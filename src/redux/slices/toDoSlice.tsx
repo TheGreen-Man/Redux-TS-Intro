@@ -1,5 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
+
+interface addToDo {
+	text: string;
+	completed: boolean;
+}
 
 const initialState = {
 	toDos: [],
@@ -10,7 +15,7 @@ const toDoSlice = createSlice({
 	initialState,
 	reducers: {
 		addToDo: {
-			reducer: (state, action) => {
+			reducer: (state, action: PayloadAction<addToDo>) => {
 				state.toDos.push(action.payload);
 			},
 			prepare: (value) => {

@@ -16,15 +16,15 @@ import {
 // };
 // const FILTER_NAMES = Object.keys(FILTER_MAP);
 
-export default function InputSection() {
-	const [toDo, setToDo] = useState("");
+const InputSection: React.FC = () => {
+	const [toDo, setToDo] = useState<string>("");
 	// const [filter, setFilter] = useState(() => true);
 
 	const inputField = useRef(null);
 	const dispatch = useDispatch();
 
-	const addToDoFunction = (e) => {
-		e.preventDefault();
+	const addToDoFunction = () => {
+		// e.preventDefault();
 		if (toDo.trim() === "") return;
 		dispatch(
 			addToDo({
@@ -58,7 +58,7 @@ export default function InputSection() {
 				value={toDo}
 				onChange={(e) => setToDo(e.target.value)}
 				onKeyPress={(e) => {
-					if (e.key === "Enter") addToDoFunction(e);
+					if (e.key === "Enter") addToDoFunction();
 				}}
 				ref={inputField}
 			/>
@@ -80,4 +80,5 @@ export default function InputSection() {
 			</button>
 		</div>
 	);
-}
+};
+export default InputSection;
